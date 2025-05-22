@@ -9,20 +9,20 @@
       <form @submit.prevent="login" class="space-y-6 text-lg">
         <input
           v-model="username"
-          placeholder="Имя Магистра"
-          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"
-        />
+          placeholder="Логин"
+          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 
+          focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"/>
         <input
           v-model="password"
           type="password"
           placeholder="Пароль"
-          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"
+          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 
+          focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"
         />
-
         <button
           type="submit"
-          class="w-full py-4 px-6 rounded-xl font-semibold text-xl bg-gradient-to-r from-yellow-500 to-yellow-700 text-black shadow-lg hover:scale-105 transition font-cursive"
-        >
+          class="w-full py-4 px-6 rounded-xl font-semibold text-xl bg-gradient-to-r from-yellow-500 
+          to-yellow-700 text-black shadow-lg hover:scale-105 transition font-cursive">
           Войти
         </button>
       </form>
@@ -43,10 +43,10 @@
 
 
 <script>
-import Header from '@/components/HeaderSite.vue'; // Импорт компонента Header
-import axios from 'axios'; // Импорт axios
-import { mapState } from 'vuex'; // Для Vuex
-import store from '../store/store'; // Убедитесь, что путь правильный
+import Header from '@/components/HeaderSite.vue'; 
+import axios from 'axios'; 
+import { mapState } from 'vuex'; 
+import store from '../store/store'; 
 import Swal from 'sweetalert2';
 import bcrypt from 'bcryptjs';
 
@@ -91,11 +91,9 @@ export default {
           this.showError("Имя и пароль обязательны!");
           return;
         }
-
         // Получение пользователя по имени
-        const response = await axios.get(`http://localhost:3000/users?username=${this.username}`);
+        const response = await axios.get(`/api/users?username=${this.username}`);
         const users = response.data;
-
         if (users.length === 0) {
           this.showError('Не верный логин или пароль!');
           return;
@@ -103,11 +101,10 @@ export default {
 
         const user = users[0];
 
-        // Проверка пароля
+       
         const isPasswordCorrect = bcrypt.compareSync(this.password, user.password);
-
         if (isPasswordCorrect) {
-          const token = 'your_generated_token'; // здесь можно сгенерировать токен
+          const token = 'your_generated_token';
           localStorage.setItem('token', token);
           store.isAuthenticated = true;
           store.token = token;

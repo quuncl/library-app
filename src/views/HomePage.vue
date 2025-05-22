@@ -147,7 +147,7 @@
           <!-- Контент -->
           <div class="text-center md:text-left">
             <h3 class="text-2xl font-semibold text-yellow-300 mb-2">{{ event.title }}</h3>
-            <p class="text-sm text-yellow-100 mb-1">📅 {{ event.date }}</p>
+            <p class="text-sm text-yellow-100 mb-1">📅 {{ event.date }} в {{ event.time }}</p> <!-- Добавлено время мероприятия -->
             <p class="text-base text-gray-300">{{ event.description }}</p>
           </div>
         </div>
@@ -195,8 +195,7 @@
         <div class="bg-[#1a1a1a] text-yellow-200 rounded-xl p-8 max-w-md w-full relative shadow-2xl">
           <button
             @click="closeModal"
-            class="absolute top-4 right-4 text-yellow-300 text-xl hover:text-yellow-400"
-          >
+            class="absolute top-4 right-4 text-yellow-300 text-xl hover:text-yellow-400">
             &times;
           </button>
           <h3 class="text-2xl font-bold mb-4 text-center">✨ Ваше предсказание</h3>
@@ -248,8 +247,9 @@
   <button 
     @click="scrollToTop"
     class="bg-gradient-to-r from-[#FFD700] to-[#FFB900] text-white py-3 px-6 rounded-full text-lg font-semibold shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:from-[#FFB900] hover:to-[#FFD700] hover:shadow-2xl active:scale-95 active:from-[#FFA500] active:to-[#FF8C00] active:shadow-lg flex items-center justify-center">
-    <i class="fa fa-arrow-up mr-2 text-xl"></i> ↑
-  </button>
+    <i class="fa fa-arrow-up mr-2 text-red-800 text-xl">↑ </i> <!-- Изменен цвет стрелки на красный -->
+</button>
+
   
   <!-- Кнопка для звонка -->
   <a href="tel:+79991234567" class="bg-gradient-to-r from-[#FFD700] to-[#FFB900] text-white p-4 rounded-full shadow-xl transition-all duration-300 ease-in-out hover:scale-105 hover:from-[#FFB900] hover:to-[#FFD700] hover:shadow-2xl active:scale-95 active:from-[#FFA500] active:to-[#FF8C00] active:shadow-lg flex items-center justify-center" title="Позвонить">
@@ -262,10 +262,10 @@
 
 
 <script>
-import HeaderSite from '@/components/HeaderSite.vue'; // замените на правильный путь
-import FooterSite from '@/components/FooterSite.vue'; // замените на правильный путь
-import BookCarousel from '@/components/BookCarousel.vue'; // замените на правильный путь
-import { Swiper, SwiperSlide } from 'swiper/vue'; // импорт для Swiper, если используете библиотеку Swiper
+import HeaderSite from '@/components/HeaderSite.vue'; 
+import FooterSite from '@/components/FooterSite.vue'; 
+import BookCarousel from '@/components/BookCarousel.vue'; 
+import { Swiper, SwiperSlide } from 'swiper/vue'; 
 
 export default {
   name: 'HomePage',
@@ -291,24 +291,28 @@ export default {
       events: [
         {
           date: '15 мая 2025',
+          time:'18:00',
           title: 'Путеводитель по миру романтики',
           description: 'Откройте для себя самые трогательные и вдохновляющие произведения о любви! Мы приглашаем вас на литературное путешествие, где вы сможете насладиться лучшими произведениями, которые погружают в мир любви, страсти и самоотдачи. В этот вечер мы обсудим не только классические романы, но и современные произведения, которые раскрывают различные стороны любви.',
           image: 'https://i.pinimg.com/originals/f9/7b/92/f97b925d98c699aded93263c9508eabb.gif'
         },
         {
           date: '20 мая 2025',
+          time:'21:00',
           title: 'Вечер литературных наслаждений',
           description: 'Погрузитесь в атмосферу тепла и уюта с нашей библиотечной встречей у камина. В этот вечер мы приглашаем вас провести время в компании хороших книг, теплых напитков и приятных бесед. Заварите свой любимый чай, устройтесь поудобнее у огня, и наслаждайтесь чтением классических произведений и новинок, которые создадут атмосферу покоя и вдохновения.',
           image: 'https://i.pinimg.com/originals/64/27/73/6427735ec6978cf80d5b19eb5d6ebe5b.gif'
         },
         {
           date: '1 июня 2025',
+          time:'19:00',
           title: 'Вечер эпохи и элегантности',
           description: 'Возвращаемся в атмосферу утонченной элегантности прошлых веков! Мы приглашаем вас на уникальный балл, где можно будет насладиться самыми изысканными танцами и костюмами той эпохи. Погрузитесь в чарующую атмосферу балов, где светло горят свечи, звучит классическая музыка, а гости в нарядных платьях и костюмах переживают эпоху королевских приемов.',
           image: 'https://i.pinimg.com/originals/32/80/f1/3280f112e89e54f7585763a10180ee0d.gif'
         },
         {
           date: '10 июня 2025',
+          time:'20:00',
           title: 'Литературные путешествия и открытия',
           description: 'Погружайтесь в мир невероятных путешествий и открытий на нашем уникальном литературном событии! "Исследование мира" — это вечер, посвященный тем, кто стремится расширить горизонты, будь то в книгах или в жизни. Мы отправимся в увлекательное путешествие по страницам литературы, исследуя культуру, природу и удивительные события, описанные великими авторами.',
           image: 'https://i.pinimg.com/originals/98/5b/ca/985bca02766e9e0fa3edca225cb4c628.gif'
@@ -384,8 +388,6 @@ export default {
   transform: translateY(50px);
 }
 
-
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -395,8 +397,6 @@ export default {
   }
 }
 
-<!-- Анимации -->
-    
 @keyframes fadeInUp {
   from {
     opacity: 0;

@@ -8,20 +8,32 @@
 
       <form @submit.prevent="register" class="space-y-6 text-lg">
         <input
-          v-model="username"
-          placeholder="Имя Магистра"
-          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"
-        />
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Пароль"
-          class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border border-yellow-500 focus:ring-2 focus:ring-yellow-400 font-cursive transition text-xl"
-        />
+    v-model="username"
+    type="email"
+    placeholder="Логин"
+    class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border
+     border-yellow-500 focus:ring-2 focus:ring-yellow-400 font-cursive 
+     transition text-xl"/>
 
-        <button
-  type="submit"
-  class="w-full py-4 px-6 rounded-xl font-semibold text-xl bg-gradient-to-r from-yellow-500 to-yellow-600 text-black shadow-lg hover:scale-105 transition font-cursive"
+    <input
+      v-model="password"
+      type="password"
+      placeholder="Пароль"
+      @input="checkPasswordStrength" 
+      class="w-full px-5 py-4 rounded-xl bg-black text-yellow-100 border
+       border-yellow-500 focus:ring-2
+       focus:ring-yellow-400 font-cursive transition text-xl"
+    />
+    <div class="mt-2">
+      <div
+        class="h-2 rounded-full"
+        :class="passwordStrengthClass"
+        :style="{ width: passwordStrength + '%' }"
+      ></div>
+      <p class="text-yellow-100 text-sm mt-1">{{ passwordStrengthText }}</p>
+    </div> <button type="submit" class="w-full py-4 px-6 rounded-xl font-semibold text-xl 
+        bg-gradient-to-r from-yellow-500 to-yellow-600 text-black shadow-lg hover:scale-105
+         transition font-cursive"
 >
   Зарегистрироваться
 </button>
@@ -46,15 +58,32 @@ import bcrypt from 'bcryptjs';
 export default {
   name: 'RegisterPage',
   components: {
-    Header // Используем правильное имя компонента
+    Header 
   },
   data() {
     return {
       username: '',
-      password: ''
-    }
+      password: '',
+      passwordStrength: 0,
+      passwordStrengthText: ''
+          }
   },
   methods: {
+     checkPasswordStrength() {
+      const length = this.password.length;
+      if (length > 5) {
+        this.passwordStrength = 100;
+        this.passwordStrengthText = 'Надежный пароль';
+        this.passwordStrengthClass = 'bg-green-500';
+      } else if (length > 3) {
+        this.passwordStrength = 50;
+        this.passwordStrengthText = 'Пароль средний';
+        this.passwordStrengthClass = 'bg-yellow-500';
+      } else {
+        this.passwordStrength = 0;
+        this.passwordStrengthText = 'Пароль слишком короткий';
+        this.passwordStrengthClass = 'bg-red-500';}
+      },
     async register() {
       if (!this.username || !this.password) {
         Swal.fire({
@@ -74,7 +103,6 @@ export default {
         const { data: existingUsers } = await axios.get(
           'http://localhost:3000/users?username=' + this.username
         );
-
         if (existingUsers.length > 0) {
           Swal.fire({
             title: "Имя уже занято!",
@@ -108,6 +136,7 @@ export default {
           background: '#4B0082',
           color: '#FFD700'
         });
+        
       } catch (error) {
         Swal.fire({
           title: "Ошибка регистрации!",
@@ -132,7 +161,15 @@ export default {
 .font-cursive {
   font-family: 'Garamond', serif;
 }
-
+.bg-green-500 {
+  background-color: #48bb78; /* Зеленый */
+}
+.bg-yellow-500 {
+  background-color: #ecc94b; /* Желтый */
+}
+.bg-red-500 {
+  background-color: #f56565; /* Красный */
+}
 .drop-shadow-glow {
   text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700;
 }

@@ -2,9 +2,11 @@
   <header class="fixed top-0 left-0 right-0 z-50 bg-black shadow-md">
     <nav class="max-w-7xl mx-auto flex items-center justify-between p-4">
       <!-- Логотип -->
-      <router-link to="/" class="text-2xl font-bold text-yellow-300 hover:text-yellow-300 transition-colors duration-300">
-        Мой сайт
-      </router-link>
+      <router-link to="/" class="flex items-center text-2xl font-bold text-yellow-300 hover:text-yellow-300 transition-colors duration-300">
+  <img src="@/photo/logo1.png" alt="Логотип" class="h-16 w-16 mr-2" /> <!-- Путь к изображению и классы для стилизации -->
+  
+</router-link>
+
 
       <!-- Десктопное меню -->
       <ul v-if="!hideMenu" class="hidden md:flex space-x-8 text-yellow-300 font-medium">

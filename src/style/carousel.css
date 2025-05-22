@@ -1,0 +1,37 @@
+.book-carousel {
+  background-color: black;
+  padding-top: 7rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #fef08a;
+  font-family: sans-serif;
+}
+
+@media (min-width: 768px) {
+  .book-carousel {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.font-serif {
+  font-family: serif;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.genre-section {
+  margin-bottom: 3rem;
+} 

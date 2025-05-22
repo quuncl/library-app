@@ -9,7 +9,9 @@
     "server": "npx json-server --watch db.json --port 3000",
     "preview": "npm run build && npx serve -s dist -p 8080",
     "ssh_front": "ssh -R 80:localhost:8080 localhost.run",
-    "ssh_server": "ssh -R 80:localhost:3000 localhost.run"
+    "ssh_server": "ssh -R 80:localhost:3000 localhost.run",
+    "start": "node server.js",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "autoprefixer": "^10.4.20",
@@ -40,7 +42,8 @@
     "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.5.13",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "gh-pages": "^6.3.0"
   },
   "eslintConfig": {
     "root": true,
