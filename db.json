@@ -134,6 +134,36 @@
       "username": "q@q",
       "password": "$2b$10$kAIhKIWQ12sEYWWgWq4UZOxFJZRCWPh.nu2nZIavwIr2eMRFQjKqC",
       "id": 27
+    },
+    {
+      "username": "gbhfgdhn@bjk.ru",
+      "password": "$2b$10$B8eZ1XOIqFIHmBJ9.ciqKO5a0qakvCYiOINUI/pZhSZuQq3DSionm",
+      "id": 28
+    },
+    {
+      "username": "test123@bk.ru",
+      "password": "$2b$10$Qqnv9FUYQAOArDGGWMMn1.5ZyUCp43jPH5uEAtuYhumXEWRGXpjG6",
+      "id": 29
+    },
+    {
+      "username": "gbhftdjhn@bk.ru",
+      "password": "$2b$10$5DnBdJoDc7ne3wwG5ZDU9ux8uBwOT1zdt5Qr5pvrY//TB0NRM5atO",
+      "id": 30
+    },
+    {
+      "username": "testr1234@bk.ru",
+      "password": "$2b$10$DvRB6jyFOX8D/BMPhfwSGelyuHDyCvXcCCg/4.cCN0cDADQHc4W26",
+      "id": 31
+    },
+    {
+      "username": "nghfm@bk.ru",
+      "password": "$2b$10$nFwGOmRRY6rSFTouc.Vv/eilOCZcHPh4MFFWK4KoJVBPliKczLVuW",
+      "id": 32
+    },
+    {
+      "username": "hbfdgh@bb",
+      "password": "$2b$10$MVf8YC.joEYmOyYOKq0RjOBAtXK5OEHAfgr8d.ThWq2w6LRhw2rma",
+      "id": 33
     }
   ],
   "posts": [

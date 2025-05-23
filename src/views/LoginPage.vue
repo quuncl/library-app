@@ -92,26 +92,62 @@ export default {
           return;
         }
         // Получение пользователя по имени
-        const response = await axios.get(`/api/users?username=${this.username}`);
-        const users = response.data;
-        if (users.length === 0) {
-          this.showError('Не верный логин или пароль!');
+        console.log('Ищем пользователя:', this.username);
+        const response = await axios.get(`http://localhost:3000/users`);
+        console.log('Все пользователи:', response.data);
+        
+        const users = response.data.filter(user => user.username === this.username);
+        console.log('Найденные пользователи:', users);
+        
+        if (!Array.isArray(users) || users.length === 0) {
+          this.showError('Пользователь не найден!');
           return;
         }
 
         const user = users[0];
+        console.log('Выбранный пользователь:', user);
+        console.log('Введенный пароль:', this.password);
+        console.log('Хеш пароля в БД:', user.password);
 
-       
-        const isPasswordCorrect = bcrypt.compareSync(this.password, user.password);
-        if (isPasswordCorrect) {
-          const token = 'your_generated_token';
-          localStorage.setItem('token', token);
-          store.isAuthenticated = true;
-          store.token = token;
-          await this.$router.push('/');
-          this.showSuccess("Вы успешно вошли!");
-        } else {
-          this.showError('Не верный логин или пароль!');
+        if (!user) {
+          this.showError('Пользователь не найден!');
+          return;
+        }
+
+        if (!user.password) {
+          console.error('Пароль пользователя отсутствует в БД');
+          this.showError('Ошибка данных пользователя!');
+          return;
+        }
+
+        if (!this.password) {
+          console.error('Пароль не введен');
+          this.showError('Введите пароль!');
+          return;
+        }
+
+        try {
+          console.log('Пытаемся сравнить пароли...');
+          if (!user.password || typeof user.password !== 'string') {
+            console.error('Invalid password hash in database');
+            this.showError('Ошибка данных пользователя!');
+            return;
+          }
+          const isPasswordCorrect = await bcrypt.compare(this.password, user.password);
+          console.log('Результат сравнения:', isPasswordCorrect);
+          if (isPasswordCorrect) {
+            const token = 'your_generated_token';
+            localStorage.setItem('token', token);
+            store.isAuthenticated = true;
+            store.token = token;
+            await this.$router.push('/');
+            this.showSuccess("Вы успешно вошли!");
+          } else {
+            this.showError('Неверный пароль!');
+          }
+        } catch (error) {
+          console.error('Ошибка при проверке пароля:', error);
+          this.showError('Ошибка при проверке пароля');
         }
       } catch (error) {
         console.error(error);
